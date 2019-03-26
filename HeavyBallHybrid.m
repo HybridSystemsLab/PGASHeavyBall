@@ -165,14 +165,6 @@ options = odeset('RelTol',1e-6,'MaxStep',.1);
 [tg,jg,xg] = HyEQsolver(@f,@g,@C,@D,...
     x0_g,TSPAN,JSPAN,rule,options);
 
-% timeToConvA(xa,ta);
-% timeToConvB(xb,tb);
-% timeToConvC(xc,tc);
-% timeToConvD(xd,td);
-% timeToConvE(xe,te);
-% timeToConvF(xf,tf);
-% timeToConvG(xg,tg);
-
 deltaVecA = timeToConv(xa,ta);
 deltaVecB = timeToConv(xb,tb);
 deltaVecC = timeToConv(xc,tc);
@@ -181,8 +173,7 @@ deltaVecE = timeToConv(xe,te);
 deltaVecF = timeToConv(xf,tf);
 deltaVecG = timeToConv(xg,tg);
 
-    
-%  % Prepare the data, to plot multiple hybrid arcs on same plane
+% Prepare the data, to plot multiple hybrid arcs on same plane
  minarc = min([length(xa),length(xb),length(xc),length(xd),length(xe),length(xf),length(xg)]);
  t = [ta(1:minarc),tb(1:minarc),tc(1:minarc),td(1:minarc),te(1:minarc),tf(1:minarc),tg(1:minarc)];
  j = [ja(1:minarc),jb(1:minarc),jc(1:minarc),jd(1:minarc),je(1:minarc),jf(1:minarc),jg(1:minarc)];
