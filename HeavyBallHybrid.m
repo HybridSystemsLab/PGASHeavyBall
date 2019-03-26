@@ -21,7 +21,7 @@ clear all
 set(0,'defaultTextInterpreter','latex'); 
 
 % global variables
-global gamma lambda delta eps1 eps2 rho1 rho2 direction timeToDelta_a timeToDeltaIdx_a z1delta_a z2delta_a timeToDelta_b timeToDeltaIdx_b z1delta_b z2delta_b timeToDelta_c timeToDeltaIdx_c z1delta_c z2delta_c timeToDelta_d timeToDeltaIdx_d z1delta_d z2delta_d timeToDelta_e timeToDeltaIdx_e z1delta_e z2delta_e timeToDelta_f timeToDeltaIdx_f z1delta_f z2delta_f timeToDelta_g timeToDeltaIdx_g z1delta_g z2delta_g
+global gamma lambda delta eps1 eps2 rho1 rho2 direction
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initializing the globals %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,41 +41,6 @@ setMinima();
 %%%%%%%%%%%%%%%%%%%%%%
 % setting the locals %
 %%%%%%%%%%%%%%%%%%%%%%
-
-timeToDelta_a = 0;
-timeToDeltaIdx_a = 1;
-z1delta_a = 0;
-z2delta_a = 0;
-
-timeToDelta_b = 0;
-timeToDeltaIdx_b = 1;
-z1delta_b = 0;
-z2delta_b = 0;
-
-timeToDelta_c = 0;
-timeToDeltaIdx_c = 1;
-z1delta_c = 0;
-z2delta_c = 0;
-
-timeToDelta_d = 0;
-timeToDeltaIdx_d = 1;
-z1delta_d = 0;
-z2delta_d = 0;
-
-timeToDelta_e = 0;
-timeToDeltaIdx_e = 1;
-z1delta_e = 0;
-z2delta_e = 0;
-
-timeToDelta_f = 0;
-timeToDeltaIdx_f = 1;
-z1delta_f = 0;
-z2delta_f = 0;
-
-timeToDelta_g = 0;
-timeToDeltaIdx_g = 1;
-z1delta_g = 0;
-z2delta_g = 0;
 
 % initial conditions
 z1_a = 15;
@@ -200,13 +165,22 @@ options = odeset('RelTol',1e-6,'MaxStep',.1);
 [tg,jg,xg] = HyEQsolver(@f,@g,@C,@D,...
     x0_g,TSPAN,JSPAN,rule,options);
 
-timeToConvA(xa,ta);
-timeToConvB(xb,tb);
-timeToConvC(xc,tc);
-timeToConvD(xd,td);
-timeToConvE(xe,te);
-timeToConvF(xf,tf);
-timeToConvG(xg,tg);
+% timeToConvA(xa,ta);
+% timeToConvB(xb,tb);
+% timeToConvC(xc,tc);
+% timeToConvD(xd,td);
+% timeToConvE(xe,te);
+% timeToConvF(xf,tf);
+% timeToConvG(xg,tg);
+
+deltaVecA = timeToConv(xa,ta);
+deltaVecB = timeToConv(xb,tb);
+deltaVecC = timeToConv(xc,tc);
+deltaVecD = timeToConv(xd,td);
+deltaVecE = timeToConv(xe,te);
+deltaVecF = timeToConv(xf,tf);
+deltaVecG = timeToConv(xg,tg);
+
     
 %  % Prepare the data, to plot multiple hybrid arcs on same plane
  minarc = min([length(xa),length(xb),length(xc),length(xd),length(xe),length(xf),length(xg)]);
@@ -227,40 +201,40 @@ modificatorJ{3} = 3;
 
 subplot(2,1,1), plotHarc(t,j,x1,[],modificatorF,modificatorJ);
 hold on
-plot(timeToDelta_a,z1delta_a,'k.','MarkerSize', 20)
-strDelta_a = [num2str(timeToDelta_a), 's'];
-text(timeToDelta_a,z1delta_a,strDelta_a,'HorizontalAlignment','left','VerticalAlignment','bottom');
-plot(timeToDelta_b,z1delta_b,'k.','MarkerSize', 20)
-strDelta_b = [num2str(timeToDelta_b), 's'];
-text(timeToDelta_b,z1delta_b,strDelta_b,'HorizontalAlignment','left','VerticalAlignment','top');
-plot(timeToDelta_c,z1delta_c,'k.','MarkerSize', 20)
-strDelta_c = [num2str(timeToDelta_c), 's'];
-text(timeToDelta_c,z1delta_c,strDelta_c,'HorizontalAlignment','left','VerticalAlignment','top');
-plot(timeToDelta_d,z1delta_d,'k.','MarkerSize', 20)
-strDelta_d = [num2str(timeToDelta_d), 's'];
-text(timeToDelta_d,z1delta_d,strDelta_d,'HorizontalAlignment','left','VerticalAlignment','top');
-plot(timeToDelta_e,z1delta_e,'k.','MarkerSize', 20)
-strDelta_e = [num2str(timeToDelta_e), 's'];
-text(timeToDelta_e,z1delta_e,strDelta_e,'HorizontalAlignment','left','VerticalAlignment','top');
-plot(timeToDelta_f,z1delta_f,'k.','MarkerSize', 20)
-strDelta_f = [num2str(timeToDelta_f), 's'];
-text(timeToDelta_f,z1delta_f,strDelta_f,'HorizontalAlignment','left','VerticalAlignment','top');
-plot(timeToDelta_g,z1delta_g,'k.','MarkerSize', 20)
-strDelta_g = [num2str(timeToDelta_g), 's'];
-text(timeToDelta_g,z1delta_g,strDelta_g,'HorizontalAlignment','left','VerticalAlignment','top');
+plot(deltaVecA(3),deltaVecA(1),'k.','MarkerSize', 20)
+strDelta_a = [num2str(deltaVecA(3)), 's'];
+text(deltaVecA(3),deltaVecA(1),strDelta_a,'HorizontalAlignment','left','VerticalAlignment','bottom');
+plot(deltaVecB(3),deltaVecB(1),'k.','MarkerSize', 20)
+strDelta_b = [num2str(deltaVecB(3)), 's'];
+text(deltaVecB(3),deltaVecB(1),strDelta_b,'HorizontalAlignment','left','VerticalAlignment','top');
+plot(deltaVecC(3),deltaVecC(1),'k.','MarkerSize', 20)
+strDelta_c = [num2str(deltaVecC(3)), 's'];
+text(deltaVecC(3),deltaVecC(1),strDelta_c,'HorizontalAlignment','left','VerticalAlignment','top');
+plot(deltaVecD(3),deltaVecD(1),'k.','MarkerSize', 20)
+strDelta_d = [num2str(deltaVecD(3)), 's'];
+text(deltaVecD(3),deltaVecD(1),strDelta_d,'HorizontalAlignment','left','VerticalAlignment','top');
+plot(deltaVecE(3),deltaVecE(1),'k.','MarkerSize', 20)
+strDelta_e = [num2str(deltaVecE(3)), 's'];
+text(deltaVecE(3),deltaVecE(1),strDelta_e,'HorizontalAlignment','left','VerticalAlignment','top');
+plot(deltaVecF(3),deltaVecF(1),'k.','MarkerSize', 20)
+strDelta_f = [num2str(deltaVecF(3)), 's'];
+text(deltaVecF(3),deltaVecF(1),strDelta_f,'HorizontalAlignment','left','VerticalAlignment','top');
+plot(deltaVecG(3),deltaVecG(1),'k.','MarkerSize', 20)
+strDelta_g = [num2str(deltaVecG(3)), 's'];
+text(deltaVecG(3),deltaVecG(1),strDelta_g,'HorizontalAlignment','left','VerticalAlignment','top');
 grid on
 ylabel('$\mathrm{z_1}$','FontSize',16)
 xlabel('$\mathrm{t}$','FontSize',16)
 axis([0 6 -10 35]);
 subplot(2,1,2), plotHarc(t,j,x2,[],modificatorF,modificatorJ);
 hold on
-plot(timeToDelta_a,z2delta_a,'k.','MarkerSize', 20)
-plot(timeToDelta_b,z2delta_b,'k.','MarkerSize', 20)
-plot(timeToDelta_c,z2delta_c,'k.','MarkerSize', 20)
-plot(timeToDelta_d,z2delta_d,'k.','MarkerSize', 20)
-plot(timeToDelta_e,z2delta_e,'k.','MarkerSize', 20)
-plot(timeToDelta_f,z2delta_f,'k.','MarkerSize', 20)
-plot(timeToDelta_g,z2delta_g,'k.','MarkerSize', 20)
+plot(deltaVecA(3),deltaVecA(2),'k.','MarkerSize', 20)
+plot(deltaVecB(3),deltaVecB(2),'k.','MarkerSize', 20)
+plot(deltaVecC(3),deltaVecC(2),'k.','MarkerSize', 20)
+plot(deltaVecD(3),deltaVecD(2),'k.','MarkerSize', 20)
+plot(deltaVecE(3),deltaVecE(2),'k.','MarkerSize', 20)
+plot(deltaVecF(3),deltaVecF(2),'k.','MarkerSize', 20)
+plot(deltaVecG(3),deltaVecG(2),'k.','MarkerSize', 20)
 grid on
 ylabel('$\mathrm{z_2}$','FontSize',16)
 xlabel('$\mathrm{t}$','FontSize',16)
@@ -275,27 +249,27 @@ plotHarc(x1,j,x2,[],modificatorF,modificatorJ);
 xlabel('$\mathrm{z_1}$','FontSize',16)
 ylabel('$\mathrm{z_2}$','FontSize',16)
 hold on
-plot(z1delta_a,z2delta_a,'k.','MarkerSize', 20)
-strDelta_a = [num2str(timeToDelta_a), 's'];
-text(z1delta_a,z2delta_a,strDelta_a,'HorizontalAlignment','right','VerticalAlignment','bottom');
-plot(z1delta_b,z2delta_b,'k.','MarkerSize', 20)
-strDelta_b= [num2str(timeToDelta_b), 's'];
-text(z1delta_b,z2delta_b,strDelta_b,'HorizontalAlignment','right','VerticalAlignment','top');
-plot(z1delta_c,z2delta_c,'k.','MarkerSize', 20)
-strDelta_c= [num2str(timeToDelta_c), 's'];
-text(z1delta_c,z2delta_c,strDelta_c,'HorizontalAlignment','right','VerticalAlignment','top');
-plot(z1delta_d,z2delta_d,'k.','MarkerSize', 20)
-strDelta_d = [num2str(timeToDelta_d), 's'];
-text(z1delta_d,z2delta_d,strDelta_d,'HorizontalAlignment','right','VerticalAlignment','top');
-plot(z1delta_e,z2delta_e,'k.','MarkerSize', 20)
-strDelta_e = [num2str(timeToDelta_e), 's'];
-text(z1delta_e,z2delta_e,strDelta_e,'HorizontalAlignment','left','VerticalAlignment','bottom');
-plot(z1delta_f,z2delta_f,'k.','MarkerSize', 20)
-strDelta_f = [num2str(timeToDelta_f), 's'];
-text(z1delta_f,z2delta_f,strDelta_f,'HorizontalAlignment','left','VerticalAlignment','bottom');
-plot(z1delta_g,z2delta_g,'k.','MarkerSize', 20)
-strDelta_g = [num2str(timeToDelta_g), 's'];
-text(z1delta_g,z2delta_g,strDelta_g,'HorizontalAlignment','left','VerticalAlignment','bottom');
+plot(deltaVecA(1),deltaVecA(2),'k.','MarkerSize', 20)
+strDelta_a = [num2str(deltaVecA(3)), 's'];
+text(deltaVecA(1),deltaVecA(2),strDelta_a,'HorizontalAlignment','right','VerticalAlignment','bottom');
+plot(deltaVecB(1),deltaVecB(2),'k.','MarkerSize', 20)
+strDelta_b= [num2str(deltaVecB(3)), 's'];
+text(deltaVecB(1),deltaVecB(2),strDelta_b,'HorizontalAlignment','right','VerticalAlignment','top');
+plot(deltaVecC(1),deltaVecC(2),'k.','MarkerSize', 20)
+strDelta_c= [num2str(deltaVecC(3)), 's'];
+text(deltaVecC(1),deltaVecC(2),strDelta_c,'HorizontalAlignment','right','VerticalAlignment','top');
+plot(deltaVecD(1),deltaVecD(2),'k.','MarkerSize', 20)
+strDelta_d = [num2str(deltaVecD(3)), 's'];
+text(deltaVecD(1),deltaVecD(2),strDelta_d,'HorizontalAlignment','right','VerticalAlignment','top');
+plot(deltaVecE(1),deltaVecE(2),'k.','MarkerSize', 20)
+strDelta_e = [num2str(deltaVecE(3)), 's'];
+text(deltaVecE(1),deltaVecE(2),strDelta_e,'HorizontalAlignment','left','VerticalAlignment','bottom');
+plot(deltaVecF(1),deltaVecF(2),'k.','MarkerSize', 20)
+strDelta_f = [num2str(deltaVecF(3)), 's'];
+text(deltaVecF(1),deltaVecF(2),strDelta_f,'HorizontalAlignment','left','VerticalAlignment','bottom');
+plot(deltaVecG(1),deltaVecG(2),'k.','MarkerSize', 20)
+strDelta_g = [num2str(deltaVecG(3)), 's'];
+text(deltaVecG(1),deltaVecG(2),strDelta_g,'HorizontalAlignment','left','VerticalAlignment','bottom');
 axis([-5 35 -45 45]);
 grid on
 hold off
