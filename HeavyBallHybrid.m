@@ -21,7 +21,7 @@ clear all
 set(0,'defaultTextInterpreter','latex'); 
 
 % global variables
-global gamma lambda delta eps1 eps2 rho1 rho2 direction
+global gamma lambda delta eps1 eps2 rho1 rho2 direction nu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initializing the globals %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,6 +35,8 @@ rho1 = 0.001;
 rho2 = 0.002;
 
 delta = 0.01;
+
+nu = 1;
 
 setMinima();
 
@@ -52,7 +54,7 @@ direction = 0;
 while direction == 0
     direction = randi([-1,1]); 
 end
-a_a = sign(direction);
+a_a = nu*sign(direction);
 
 z1_b = 5*(3-sqrt(5));
 z2_b = 0;
@@ -63,7 +65,7 @@ direction = 0;
 while direction == 0
     direction = randi([-1,1]); 
 end
-a_b = sign(direction);
+a_b = nu*sign(direction);
 
 z1_c = 5*(3+sqrt(5));
 z2_c = 0;
@@ -73,7 +75,7 @@ direction = 0;
 while direction == 0
     direction = randi([-1,1]); 
 end
-a_c = sign(direction);
+a_c = nu*sign(direction);
 
 z1_d = 6;
 z2_d = 0;
@@ -85,7 +87,7 @@ direction = 0;
 while direction == 0
     direction = randi([-1,1]); 
 end
-a_d = sign(direction);
+a_d = nu*sign(direction);
 
 z1_e = -1; 
 z2_e = 0;
@@ -95,7 +97,7 @@ direction = 0;
 while direction == 0
     direction = randi([-1,1]); 
 end
-a_e = sign(direction);
+a_e = nu*sign(direction);
 
 z1_f = 31; 
 z2_f = 0;
@@ -105,7 +107,7 @@ direction = 0;
 while direction == 0
     direction = randi([-1,1]); 
 end
-a_f = sign(direction);
+a_f = nu*sign(direction);
 
 z1_g = 24.5;
 z2_g = 0;
@@ -115,7 +117,7 @@ direction = 0;
 while direction == 0
     direction = randi([-1,1]); 
 end
-a_g = sign(direction);
+a_g = nu*sign(direction);
 
 % Assign initial conditions to vector
 x0_a = [z1_a;z2_a;p_a;a_a];

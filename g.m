@@ -15,6 +15,7 @@ function xplus = g(x)
 %   Revision: 0.0.0.3 Date: 05/20/2015 3:42:00
 
 % The global variables
+global nu
 
 % state
 z1 = x(1);
@@ -26,15 +27,10 @@ if z2 == 0
     while direction == 0
         direction = randi([-1,1]); 
     end
-    a = sign(direction);
+    a = nu*sign(direction);
 else
-    a = sign(z2);
+    a = nu*sign(z2);
 end
-
-% a = 0; 
-% while a == 0
-%     a = randi([-1,1]); 
-% end
 
 xplus = [z1;z2;1-q;a];
 end
