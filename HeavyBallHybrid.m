@@ -25,14 +25,14 @@ global gamma lambda delta eps1 eps2 rho1 rho2 direction nu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initializing the globals %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-lambda = 130;
+lambda = 145;
 gamma = 3/4;
 
-eps1 = 0.001;
-eps2 = 0.002;
+eps1 = 0.05;
+eps2 = 0.06;
 
-rho1 = 0.001;
-rho2 = 0.002;
+rho1 = 0.05;
+rho2 = 0.06;
 
 delta = 0.01;
 
